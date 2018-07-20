@@ -2,7 +2,7 @@
 
 The mixin-based american roulette wheel game service.
 
-You can try this game on the Mixin Messenger.Mixin bot ID: 70000100168
+You can try this game bot on the Mixin Messenger. Mixin bot ID: 70000100168
 
 ## Installation
 

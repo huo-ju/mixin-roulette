@@ -1,0 +1,30 @@
+{
+  "name": "mixin-roulette",
+  "description": "mixin roulette game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {},
+  "keywords": [
+    "mixin",
+    "blockchain",
+    "cryptocurrency"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {},
+  "homepage": "",
+  "dependencies": {
+    "bignumber.js": "^7.0.2",
+    "jsonwebtoken": "^8.2.1",
+    "koa": "^2.5.1",
+    "koa-cookie": "^1.0.0",
+    "mixin-node": "^1.0.10",
+    "mysql2": "^1.5.3",
+    "uuid-parse": "^1.0.0"
+  },
+  "devDependencies": {
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.3"
+  }
+}

@@ -1,0 +1,383 @@
+<!-- http://localhost:3000/?conversation_id=11111 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Roulette</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .dialog {
+      visibility: hidden;
+    }
+    .dialog.show {
+      visibility: visible;
+    }
+    .dialog input {
+      width: 100px;
+    }
+    .dialog .content {
+      text-align: center;
+      margin-top: -10px;
+    }
+    .dialog .content p {
+      margin-bottom: 15px;
+    }
+    .roulette {
+      position: relative;
+    }
+    .roulette img {
+      width: 100%;
+    }
+    .info {
+      visibility: hidden;
+    }
+    .info.show {
+      visibility: visible;
+    }
+    .top {
+      display: flex;
+    }
+    .grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    i {
+      display: inline-block;
+      opacity: .6;
+    }
+    .top-l {
+      margin-top: 3vw;
+    }
+    .top-l i {
+      display: block;
+      width: 10vw;
+      height: 12.5vw;
+    }
+    .top-r {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      margin-top: 3vw;
+    }
+    .top-r i {
+      width: 6.7vw;
+      height: 8.3vw;
+    }
+    .bottom {
+      margin-left: 10vw;
+    }
+    .bottom-t {
+      height: 4.8vw;
+    }
+    .bottom-t i {
+      width: 26vw;
+      height: 4.8vw;
+    }
+    .bottom-b {
+      display: flex;
+    }
+    .bottom-b i {
+      width: 13.4vw;
+      height: 5.2vw;
+    }
+    .error {
+      margin-top: 5px;
+      color: #ff5722;
+      text-align: center;
+    }
+    .lds-ring {
+      display: inline-block;
+      position: relative;
+      width: 14px;
+      height: 14px;
+    }
+    .lds-ring span {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      margin: 6px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      top: -4px;
+      animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: #fff transparent transparent transparent;
+    }
+    .lds-ring span:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    .lds-ring span:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    .lds-ring span:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+    @keyframes lds-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="roulette">
+      <div class="grid">
+        <div class="top">
+          <div class="top-l">
+            <i class="primary-bg-color" @click="bet('00')"></i>
+            <i class="accent-bg-color" @click="bet('0')"></i>
+          </div>
+          <div class="top-r">
+            <i @click="bet('3')"></i>
+            <i @click="bet('6')"></i>
+            <i @click="bet('9')"></i>
+            <i @click="bet('12')"></i>
+            <i @click="bet('15')"></i>
+            <i @click="bet('18')"></i>
+            <i @click="bet('21')"></i>
+            <i @click="bet('24')"></i>
+            <i @click="bet('27')"></i>
+            <i @click="bet('30')"></i>
+            <i @click="bet('33')"></i>
+            <i @click="bet('36')"></i>
+            <i @click="bet('1 2-1')"></i>
+            
+            <i @click="bet('2')"></i>
+            <i @click="bet('5')"></i>
+            <i @click="bet('8')"></i>
+            <i @click="bet('11')"></i>
+            <i @click="bet('14')"></i>
+            <i @click="bet('17')"></i>
+            <i @click="bet('20')"></i>
+            <i @click="bet('23')"></i>
+            <i @click="bet('26')"></i>
+            <i @click="bet('29')"></i>
+            <i @click="bet('32')"></i>
+            <i @click="bet('35')"></i>
+            <i @click="bet('2 2-1')"></i>
+
+            <i @click="bet('1')"></i>
+            <i @click="bet('4')"></i>
+            <i @click="bet('7')"></i>
+            <i @click="bet('10')"></i>
+            <i @click="bet('13')"></i>
+            <i @click="bet('16')"></i>
+            <i @click="bet('19')"></i>
+            <i @click="bet('22')"></i>
+            <i @click="bet('25')"></i>
+            <i @click="bet('28')"></i>
+            <i @click="bet('31')"></i>
+            <i @click="bet('34')"></i>
+            <i @click="bet('3 2-1')"></i>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="bottom-t">
+            <i @click="bet('1st 12')"></i>
+            <i @click="bet('2nd 12')"></i>
+            <i @click="bet('3rd 12')"></i>
+          </div>
+          <div class="bottom-b">
+            <i @click="bet('1-18')"></i>
+            <i @click="bet('even')"></i>
+            <i @click="bet('red')"></i>
+            <i @click="bet('black')"></i>
+            <i @click="bet('odd')"></i>
+            <i @click="bet('19-36')"></i>
+          </div>
+        </div>
+      </div>
+      <img src="https://ww4.sinaimg.cn/large/006tKfTcgy1frgkyvx2s4j30x20dekel.jpg">
+    </div>
+
+    <el-select v-model="asset" placeholder="请选择虚拟币类型" style="margin-left: 20px;" @change="changeAsset">
+      <el-option
+        v-for="item in assets"
+        :key="item"
+        :label="item"
+        :value="item">
+      </el-option>
+    </el-select>
+
+    <div class="info" style="margin: 20px;" v-if="listbet&& listbet.length > 0" v-bind:class="{show: loaded}">
+      <ul style="margin-left: 20px;">
+        <li v-for="bet in listbet">{{ bet.betrule }} : <span style="font-weight: bold;">{{bet.betvalue}}</span> {{bet.asset}}</li>
+      </ul>
+      <div>------</div>
+      <div>Total: {{ total }} {{ asset }}</div>
+      <br>
+      <div>完成下注之后请关闭此窗口，到对话界面完成支付</div>
+      <el-button size="small" @click="reset">Reset</el-button>
+    </div>
+
+    <div class="dialog" v-bind:class="{show: loaded}">
+      <el-dialog :visible.sync="visible" title="下注">
+        <div class="content">
+          <p>押 <strong style="font-size: 20px;">{{ rule }}</strong></p>
+          <el-input type="number" v-model="betInput" placeholder="输入金额" style="width: auto;"></el-input> {{asset}}
+        </div>
+        <p class="error" v-if="errorMsg">{{ errorMsg }}</p>
+        <p class="bottom" style="text-align: center; margin-top: 25px; margin-left: 0;">
+          <el-button size="small" @click="close">取消</el-button>
+          <el-button size="small" type="primary" @click="submit()">确定 <span class="lds-ring" v-if="submitting"><span></span><span></span><span></span><span></span></span></el-button>
+        </p>
+      </el-dialog>
+    </div>
+  </div>
+</body>
+
+<script src="./js/vue.min.js"></script>
+<script src="./js/vue-element-ui.min.js"></script>
+<script src="./js/bn.js"></script>
+<script src="./js/vue.resource.min.js"></script>
+<script src="./js/uuid.min.js"></script>
+<script>
+  const util = {
+    getParam(name) {
+      let result = null,
+          tmp = [];
+      location.search
+          .substr(1)
+          .split("&")
+          .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === name) result = decodeURIComponent(tmp[1]);
+          });
+      return result;
+    },
+    environment() {
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.MixinContext) {
+        return 'iOS';
+      }
+      if (window.MixinContext && window.MixinContext.getContext) {
+        return 'Android';
+      }
+      return undefined;
+    },
+    conversationId() {
+      switch (this.environment()) {
+      case 'iOS':
+        var ctx = prompt('MixinContext.getContext()');
+        return JSON.parse(ctx).conversation_id;
+      case 'Android':
+        var ctx = window.MixinContext.getContext();
+        return JSON.parse(ctx).conversation_id;
+      default:
+        return undefined;
+      }
+    }
+
+  }
+
+  
+  new Vue({
+    el: '#app',
+    data: {
+      assets: ['CNB', 'CANDY', 'EOS'],
+      visible: false,
+      rule: '',
+      asset: 'CNB',
+      loaded: false,
+      betInput: '',
+      errorMsg: '',
+      conversation_id:'',
+      listbet: [],
+      total: 0,
+      submitting: false,
+    },
+    mounted() {
+      this.loaded = true;
+      this.conversation_id =  util.conversationId();
+      this.$http.get(`/api/listbet`)
+      .then(res => {
+        this.listbet = res.data.data.lists;
+        this.total = res.data.data.bettotal;
+      }, res => {
+        this.$message.error('获取列表失败了，请重试');
+      })
+    },
+    computed: {
+      //total() {
+        //let total = new BN('0', 10);
+        //this.listbet.forEach((bet, index) => {
+        //  total = total.add(new BN(bet.betvalue, 10));
+        //});
+        //return total.toString(10);
+      //}
+    },
+    methods: {
+      bet(value) {
+        this.betInput = '';
+        this.errorMsg = '';
+        this.rule = value;
+        this.visible = true;
+      },
+      close() {
+        this.visible = false;
+      },
+      submit() {
+        if (!this.betInput) {
+          this.errorMsg = '请输入金额';
+          return false;
+        }
+        this.submitting = true;
+        this.$http.post(`/api/addbet/${this.conversation_id}`, {
+          message_id: uuid(),
+          rule: this.rule,
+          betvalue: this.betInput,
+          asset: this.asset,
+        }).then(res => {
+          if(res.data.err){
+            this.$message.error(res.data.err);
+            this.visible = false;
+            this.submitting = false;
+          }else{
+            this.$http.get(`/api/listbet`)
+              .then(res => {
+                this.listbet = res.data.data.lists;
+                this.total = res.data.data.bettotal;
+                this.visible = false;
+                this.submitting = false;
+              }, res => {
+                this.$message.error('获取列表失败了，请重试');
+                this.visible = false;
+                this.submitting = false;
+              })
+          }
+        }, res => {
+          this.$message.error('下注失败了，请重试');
+          this.visible = false;
+          this.submitting = false;
+        });
+      },
+      reset() {
+        this.listbet = []
+        this.$http.delete(`/api/cleanbet`)
+          .then(res => {
+            this.listbet = [];
+          }, res => {
+            this.$message.error('reset失败，请重试');
+            this.visible = false;
+            this.submitting = false;
+          })
+      },
+      changeAsset(asset) {
+        this.reset();
+      }
+    }
+  })
+</script>
+</html>

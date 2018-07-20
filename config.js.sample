@@ -1,0 +1,26 @@
+let config = {};
+
+config.mixin = {
+    client_id         : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    client_secret     : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    aeskey            : "xxxxxxx",
+    pin               : "xxxxx",
+    session_id    : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    privatekey    : "mixin_dev.key",
+    share_secret  : "xxxxxxxxxx"
+}
+
+config.assetid = {"CNB":"965e5c6e-434c-3fa9-b780-c50f43cd955c", "CANDY":"43b645fc-a52c-38a3-8d3b-705e7aaefa15","EOS":"f8127159-e473-389d-8e0c-9ac5a4dc8cc6"};
+
+config.mysql = {
+        host           : 'localhost',
+        port           : 3306,
+        database       : '',
+        user           : '',
+        password       : '',
+        dialect        : 'mysql',
+        timezone       : 'utc',
+    },
+
+
+module.exports = config; 

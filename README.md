@@ -6,6 +6,7 @@ You can try this game bot on the Mixin Messenger. Mixin bot ID: 70000100168
 
 ![](https://raw.githubusercontent.com/virushuo/mixin-roulette/master/bot.png)
 
+Thanks [@raimonfuns](https://github.com/raimonfuns)  for the Web UI.
 
 ## Installation
 
